@@ -1,0 +1,109 @@
+type Book
+  @model(
+    queries: { get: "getBook", list: "listBooks" }
+    mutations: {
+      create: "createBook"
+      update: "updateBook"
+      delete: "deleteBook"
+    }
+  )
+  @auth(
+    rules: [
+      { allow: groups, groups: ["admin"], operations: [create, update, delete] }
+      { allow: private, operations: [read, create, update, delete] }
+      { allow: public, operations: [read, create, update, delete] }
+    ]
+  ) {
+  id: ID!
+  title: String!
+  description: String
+  image: String
+  author: String
+  featured: Boolean
+  price: Float
+  orders: [BookOrder] @hasMany(indexName: "byBook", fields: ["id"])
+}
+
+type BookOrder
+  @model(
+    queries: { get: "getBookOrder", list: "listBookOrders" }
+    mutations: { create: "createBookOrder" }
+  )
+  @auth(
+    rules: [
+      { allow: owner, identityClaim: "email", ownerField: "customer" }
+      { allow: groups, groups: ["admin"] }
+    ]
+  ) {
+  id: ID! @primaryKey
+  book_id: ID! @index(name: "byOrder", sortKeyFields: ["order_id"])
+  order_id: ID! @index(name: "byBook", sortKeyFields: ["book_id"])
+  book: Book @belongsTo(fields: ["book_id"])
+  order: Order @belongsTo(fields: ["order_id"])
+}
+
+type Order
+  @model(queries: { get: "getOrder", list: "listOrders" }, mutations: {})
+  @auth(
+    rules: [
+      { allow: owner, identityClaim: "email", ownerField: "user" }
+      { allow: groups, groups: ["admin"] }
+    ]
+  ) {
+  id: ID! @primaryKey
+  user: String! @index(name: "byUser", sortKeyFields: ["id"])
+  date: String
+  total: Float
+  books: [BookOrder] @hasMany(indexName: "byOrder", fields: ["id"])
+}
+
+enum OrderStatus {
+  SUCCESS
+  FAILED
+}
+
+input CartItem {
+  id: ID!
+  title: String
+  image: String
+  price: Float
+  amount: Int
+}
+
+input bulkCreateBook {
+  id: ID!
+  title: String!
+  description: String
+  author: String
+  featured: Boolean
+  price: Float
+}
+
+enum bookBulkCreateStatus {
+  SUCCESS
+  FAILED
+  ERROR
+}
+
+input ProcessOrderInput {
+  success_url: String
+  cancel_url: String
+  price: String
+  quantity: Int
+  mode: String
+}
+
+type paymentLink {
+  paymentLink: String!
+}
+
+type Mutation {
+  processOrder(input: ProcessOrderInput!): paymentLink
+    @function(name: "processOrder-${env}")
+  bookBulkCreate(input: [bulkCreateBook]): bookBulkCreateStatus
+    @function(name: "bulkCreate-${env}")
+  bookBulkUpdate(input: [bulkCreateBook]): bookBulkCreateStatus
+    @function(name: "bulkUpdate-${env}")
+  customBookDelete(id: String!): bookBulkCreateStatus
+    @function(name: "bookDelete-${env}")
+}

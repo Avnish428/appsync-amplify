@@ -1,0 +1,55 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-awsamplifyappsync-dev-125419-authRole",
+      "UnauthRoleArn": "arn:aws:iam::541145257397:role/amplify-awsamplifyappsync-dev-125419-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::541145257397:role/amplify-awsamplifyappsync-dev-125419-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-awsamplifyappsync-dev-125419-deployment",
+      "UnauthRoleName": "amplify-awsamplifyappsync-dev-125419-unauthRole",
+      "StackName": "amplify-awsamplifyappsync-dev-125419",
+      "StackId": "arn:aws:cloudformation:us-east-1:541145257397:stack/amplify-awsamplifyappsync-dev-125419/63951580-55f4-11ee-a06b-12a98698f69b",
+      "AmplifyAppId": "du2golck51chf"
+    },
+    "categories": {
+      "auth": {
+        "awsamplifyappsyncbb5784c1bb5784c1": {},
+        "userPoolGroups": {}
+      },
+      "function": {
+        "AdminQueries44fad572": {
+          "deploymentBucketName": "amplify-awsamplifyappsync-dev-125419-deployment",
+          "s3Key": "amplify-builds/AdminQueries44fad572-34326253664c2f76786a-build.zip"
+        },
+        "processOrder": {
+          "deploymentBucketName": "amplify-awsamplifyappsync-dev-125419-deployment",
+          "s3Key": "amplify-builds/processOrder-4963693433685630544c-build.zip"
+        },
+        "createOrder": {
+          "deploymentBucketName": "amplify-awsamplifyappsync-dev-125419-deployment",
+          "s3Key": "amplify-builds/createOrder-4c527633353444347377-build.zip"
+        },
+        "bulkCreate": {
+          "deploymentBucketName": "amplify-awsamplifyappsync-dev-125419-deployment",
+          "s3Key": "amplify-builds/bulkCreate-34626b4b566c5449344f-build.zip"
+        },
+        "bulkUpdate": {
+          "deploymentBucketName": "amplify-awsamplifyappsync-dev-125419-deployment",
+          "s3Key": "amplify-builds/bulkUpdate-557756742b5a31624557-build.zip"
+        },
+        "bookDelete": {
+          "deploymentBucketName": "amplify-awsamplifyappsync-dev-125419-deployment",
+          "s3Key": "amplify-builds/bookDelete-4a2f744565513251564e-build.zip"
+        },
+        "processPayment": {
+          "deploymentBucketName": "amplify-awsamplifyappsync-dev-125419-deployment",
+          "s3Key": "amplify-builds/processPayment-52466b64516c434e634e-build.zip"
+        }
+      },
+      "api": {
+        "awsamplifyappsync": {},
+        "AdminQueries": {}
+      }
+    }
+  }
+}
